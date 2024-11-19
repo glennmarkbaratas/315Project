@@ -24,7 +24,19 @@
                 <th>Task</th>
                 <th>Actions</th>
             </tr>
-            
+            <?php
+            // Fetch and display tasks from the database
+            $result = $conn->query("SELECT * FROM tasks ORDER BY id DESC");
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($row['task']) . "</td>";
+                echo "<td class='action-links'>
+                        <a href='edit_task.php?id=" . $row['id'] . "' class='edit-btn'>Edit</a>
+                        <a href='#' class='delete-btn' onclick='openModal(" . $row['id'] . ")'>Delete</a>
+                      </td>";
+                echo "</tr>";
+            }
+            ?>
         </table>
     </div>
 
